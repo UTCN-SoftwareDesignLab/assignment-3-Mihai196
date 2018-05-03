@@ -1,5 +1,6 @@
 package model.validation;
 
+import dto.PatientDTO;
 import model.Patient;
 
 import java.util.ArrayList;
