@@ -6,8 +6,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @EntityScan("model")
-@EnableJpaRepositories({"repository.user","repository.patient"})
-@ComponentScan({"model","repository.user","repository.patient","service.user","service.patient","controller","config"})
+@EnableJpaRepositories({"repository.user","repository.patient","repository.consultation"})
+@ComponentScan({"model","repository.user","repository.patient","repository.consultation","service.user","service.patient","service.consultation","controller","config"})
 public class Application {
 
     public static void main(String []args)
