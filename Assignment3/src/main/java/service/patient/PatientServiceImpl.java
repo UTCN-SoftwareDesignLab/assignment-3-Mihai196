@@ -79,4 +79,10 @@ public class PatientServiceImpl implements PatientService {
     public List<Patient> findAllPatients() {
         return patientRepository.findAll();
     }
+
+    @Override
+    public Patient findById(Long id) {
+        Optional<Patient> patientOptional = patientRepository.findById(id);
+        return patientOptional.orElse(null);
+    }
 }

@@ -53,6 +53,25 @@
     </tr>
     </tbody>
 </table>
+<h2>Doctors:</h2> <span th:text="${typeTable}"/>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Username</th>
+        <th>Role</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.username}"></td>
+        <td th:text="${user.role}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<hr/>
 
 <hr/>
 
@@ -100,6 +119,7 @@
         <input type="submit" class="button" name="update" value="UpdatePatient" />
         <input type="submit" class="button" name="delete" value="Delete" />
         <input type="submit" class="button" name="viewPatients" value="View Patients" />
+        <input type="submit" class="button" name="viewDoctors" value="View Doctors" />
         <input type="submit" class="button" name="scheduleConsultations" value="Schedule Consultations" />
     </form>
 </div>

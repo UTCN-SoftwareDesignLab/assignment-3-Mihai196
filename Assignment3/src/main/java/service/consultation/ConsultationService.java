@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 public interface ConsultationService {
-    Notification<Boolean> addConsultation(Long doctorId,Long patientId,Date date,String description);
+    Notification<Boolean> addConsultation(Long doctorId,Long patientId,Date date);
     Notification<Boolean> updateConsultation(Long id,Date date,String description);
     List<Consultation> viewAllConsultations();
     void deleteConsultation(Long id);

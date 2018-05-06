@@ -27,7 +27,7 @@ public class ConsultationServiceImpl implements ConsultationService {
     private PatientRepository patientRepository;
 
     @Override
-    public Notification<Boolean> addConsultation(Long doctorId, Long patientId, Date date, String description) {
+    public Notification<Boolean> addConsultation(Long doctorId, Long patientId, Date date) {
         Optional<User> userOptional=userRepository.findById(doctorId);
         Optional<Patient> patientOptional=patientRepository.findById(patientId);
         User user=new User();
@@ -37,7 +37,7 @@ public class ConsultationServiceImpl implements ConsultationService {
             user=userOptional.get();
             patient=patientOptional.get();
         }
-        Consultation consultation=new ConsultationBuilder().setDoctor(user).setPatient(patient).setDate(date).setDescription(description).build();
+        Consultation consultation=new ConsultationBuilder().setDoctor(user).setPatient(patient).setDate(date).build();
         ConsultationValidator consultationValidator=new ConsultationValidator();
         boolean consultationValidation=consultationValidator.validate(consultation);
         Notification<Boolean> consultationNotification=new Notification<>();

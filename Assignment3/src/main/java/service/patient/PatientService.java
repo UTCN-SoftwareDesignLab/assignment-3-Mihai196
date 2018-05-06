@@ -13,5 +13,6 @@ public interface PatientService {
     Notification<Boolean> updatePatient(Long id,String name,Long idCardNr,Long cnp,String address);
     void deletePatient(Long id);
     List<Patient> findAllPatients();
+    Patient findById(Long id);
 
 }
