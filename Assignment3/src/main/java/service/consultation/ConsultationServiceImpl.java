@@ -4,6 +4,7 @@ import model.Consultation;
 import model.Patient;
 import model.User;
 import model.builder.ConsultationBuilder;
+import model.builder.UserBuilder;
 import model.validation.ConsultationValidator;
 import model.validation.Notification;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -124,5 +125,11 @@ public class ConsultationServiceImpl implements ConsultationService {
             consultationNotification.setResult(Boolean.TRUE);
         }
         return consultationNotification;
+    }
+
+    @Override
+    public int findAvailabiltyDoctor(Long doctorId, Date date) {
+        User doctor=new UserBuilder().setId(doctorId).build();
+        return consultationRepository.findByDoctorAndDate(doctor,date).size();
     }
 }

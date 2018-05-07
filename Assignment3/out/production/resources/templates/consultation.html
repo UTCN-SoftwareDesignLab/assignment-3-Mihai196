@@ -4,10 +4,10 @@
 <head>
     <title>Consultations</title>
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <!--<script src="/webjars/jquery/jquery.min.js"></script>-->
-    <!--<script src="/webjars/sockjs-client/sockjs.min.js"></script>-->
-    <!--<script src="/webjars/stomp-websocket/stomp.min.js"></script>-->
-    <!--<script src="/app.js"></script>-->
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+    <script src="/app.js"></script>
     <style>
         td {
             width: 200px;
@@ -23,8 +23,8 @@
         }
     </style>
 </head>
-<body>
-<!--<button id="send" class="btn btn-default" type="submit">Send</button>-->
+<body onload="connect()" onunload="disconnect()">
+<button id="send" class="btn btn-default" type="submit">Send</button>
 <a th:href="@{/logout}">Logout</a>
 <br><a th:href="@{/backToPatient}">Back to Patient operations</a>
 
@@ -68,9 +68,9 @@
 
 
         <div class="form-group">
-            <label for="date" class="col-sm-4 control-label">Date:</label>
+            <label for="datec" class="col-sm-4 control-label">Date:</label>
             <div class="col-sm-8">
-                <input type="text" name="date" th:field="*{date}" id="date" class="form-control"/>
+                <input type="text" name="datec" th:field="*{date}" id="datec" class="form-control"/>
             </div>
         </div>
         <div class="form-group">
@@ -97,37 +97,12 @@
                 <input type="text" name="id" th:field="*{id}" id="id" class="form-control"/>
             </div>
         </div>
-        <input type="submit" class="button" name="addC" value="AddConsultation" />
         <input type="submit" class="button" name="updateC" value="UpdateConsultation" />
         <input type="submit" class="button" name="deleteC" value="Delete" />
         <input type="submit" class="button" name="viewConsultations" value="ViewAllConsultations" />
     </form>
 </div>
-
-<!--<div id="main-content" class="container">-->
-    <!--<div class="row">-->
-        <!--<div class="col-md-6">-->
-            <!--<form class="form-inline">-->
-                <!--<div class="form-group">-->
-                    <!--<label for="connect">WebSocket connection:</label>-->
-                    <!--<button id="connect" class="btn btn-default" type="submit">Connect</button>-->
-                    <!--<button id="disconnect" class="btn btn-default" type="submit" disabled="disabled">Disconnect-->
-                    <!--</button>-->
-                <!--</div>-->
-            <!--</form>-->
-        <!--</div>-->
-        <!--<div class="col-md-6">-->
-            <!--<form class="form-inline">-->
-                <!--<div class="form-group">-->
-                    <!--<label for="name">What is your name?</label>-->
-                    <!--<input type="text" id="name" class="form-control" placeholder="Your name here...">-->
-                <!--</div>-->
-                <!--<button id="send" class="btn btn-default" type="submit">Send</button>-->
-            <!--</form>-->
-        <!--</div>-->
-    <!--</div>-->
-    <!--</form>-->
-<!--</div>-->
+<button id="addC" class="btn btn-default" type="submit">AddConsultation</button>
 
 
 

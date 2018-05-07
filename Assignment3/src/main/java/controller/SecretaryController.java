@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import service.consultation.ConsultationService;
 import service.patient.PatientService;
 import service.user.UserService;
@@ -106,21 +107,29 @@ public class SecretaryController {
         return "/consultation";
     }
 
-    @RequestMapping(value = "/consultation", params = "addC", method = RequestMethod.POST)
-    public String addConsultation(Model model, @ModelAttribute("consultationDTO") ConsultationDTO consultationDTO) {
+    @RequestMapping(value = "/addConsultation", method = RequestMethod.GET)
+    public String addConsultation(Model model, @ModelAttribute("consultationDTO") ConsultationDTO consultationDTO,
+    @RequestParam String datec , @RequestParam long patientId, @RequestParam long doctorId) {
         model.addAttribute("patientDTO", new PatientDTO());
         try {
             String pattern = "dd.MM.yyyy";
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-            Date date = new Date(simpleDateFormat.parse(consultationDTO.getDate()).getTime());
-            Notification<Boolean> consultationNotifcation = consultationService
-                    .addConsultation(consultationDTO.getDoctorId(), consultationDTO.getPatientId(), date);
-            if (consultationNotifcation.hasErrors()) {
-                model.addAttribute("addOk", consultationNotifcation.getFormattedErrors());
-                return "/consultation";
-            } else {
-                model.addAttribute("addOk", "New consultation was added successfully");
-                return "/consultation";
+            Date dateParsed = new Date(simpleDateFormat.parse(datec).getTime());
+            if(consultationService.findAvailabiltyDoctor(doctorId,dateParsed)<5) {
+                Notification<Boolean> consultationNotifcation = consultationService
+                        .addConsultation(consultationDTO.getDoctorId(), consultationDTO.getPatientId(), dateParsed);
+                if (consultationNotifcation.hasErrors()) {
+                    model.addAttribute("addOk", consultationNotifcation.getFormattedErrors());
+                    return "/consultation";
+                } else {
+                    model.addAttribute("addOk", "New consultation was added successfully");
+                    return "/consultation";
+                }
+            }
+            else
+            {
+                model.addAttribute("addOk","Doctor already has more than 5 consultations on that day");
+                return  "/consultation";
             }
         } catch (Exception e) {
             e.printStackTrace();

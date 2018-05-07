@@ -13,5 +13,6 @@ public interface ConsultationService {
     void deleteConsultation(Long id);
     List<Consultation> findByPatient(String name);
     Notification<Boolean> updateDescription(Long id,String description);
+    int findAvailabiltyDoctor(Long doctorId,Date date);
 
 }

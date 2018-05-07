@@ -17,28 +17,9 @@ public class GreetingController {
 
     @MessageMapping("/hello")
     @SendTo("/topic/greetings")
-    public Greeting greeting(HelloMessage message) throws Exception {
+    public Greeting greeting(String text) throws Exception {
         //Thread.sleep(1000); // simulated delay
-        return new Greeting("Hello, " + message.getName() + "!");
+        return new Greeting("Consultation details"+ text);
     }
-
-   /* @Autowired
-    private ConsultationService consultationService;
-    @Autowired
-    private PatientService patientService;*/
-
-   /*@MessageMapping("/consult")
-   @SendTo("/topic/consult")
-
-    public Greeting greeting(ConsultationMessage consultationMessage) throws ParseException {
-        Patient patient = patientService.findById(consultationMessage.getPatientId());
-        String pattern = "dd.MM.yyyy";
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-        Date date = new Date(simpleDateFormat.parse(consultationMessage.getDate()).getTime());
-        String greetingText="You have appointment with patient" + patient.getName() + " at date " +date +"with details";
-        return new Greeting(greetingText);
-    }*/
-
-
 
 }
